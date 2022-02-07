@@ -2,6 +2,18 @@
 
 This is the changelog of [RandomRollCall](https://github.com/ren-yc/RandomRollCall).
 
+## 1.1.3
+
+Add Github Action to check pull request code quality.
+
+Add Github Action to see result of code on Codecov.
+
+Edit language operation mode (using YAML).
+
+Add settings file (using YAML).
+
+**From now on, the program is not a single file (using the installation package).**
+
 ## 1.1.2
 
 Add "Help" to open "README.md" in the browser.

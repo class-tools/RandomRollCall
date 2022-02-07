@@ -2,7 +2,7 @@
 
 一个使用 Python 制作的小型 GUI 随机点名程序。
 
-[简体中文](./README.zh-Hans.md) | [English](./README.md)
+**简体中文** | [English](./README.md)
 
 ## 安装
 
@@ -20,9 +20,15 @@
 
 欢迎！
 
+### 主程序
+
 **提交需使用我们的[提交格式](https://github.com/ren-yc/RycGitCommitMsgStd)。**
 
 在进行修改之后，你可以创建一个合并请求来对本项目贡献。
+
+### 翻译
+
+你可以新建一个 Issues 并把 YAML 源码放入。
 
 ## 联系我们
 
