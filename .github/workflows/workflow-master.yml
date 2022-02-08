@@ -15,8 +15,8 @@ jobs:
         python-version: 3.8
     - name: Generate coverage report
       run: |
-        apt install python3-tk
-        apt install tk-dev
+        sudo apt install python3-tk
+        sudo apt install tk-dev
         pip install pyyaml
         pip install pytest
         pip install pytest-cov
