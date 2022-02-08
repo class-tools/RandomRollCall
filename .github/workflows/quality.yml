@@ -2,7 +2,7 @@
 
 name: Python Pull Request Workflow
 
-on: [pull_request]
+on: [push, pull_request]
 jobs:
   qa:
     name: Quality check

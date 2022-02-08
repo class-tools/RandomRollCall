@@ -6,7 +6,7 @@ This is the changelog of [RandomRollCall](https://github.com/ren-yc/RandomRollCa
 
 Add Github Action to check pull request code quality.
 
-Add Github Action to see result of code on Codecov _(Fixed three times)_.
+~~Add Github Action to see result of code on Codecov _(Fixed three times)_.~~ (Deleted in 1.1.3.7)
 
 Edit language operation mode (using YAML).
 
