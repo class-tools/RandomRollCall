@@ -6,7 +6,7 @@ on: [push]
 jobs:
   codecov:
     name: Codecov Workflow
-    runs-on: ubuntu-18.04
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
     - name: Setup Python
@@ -15,8 +15,6 @@ jobs:
         python-version: 3.8
     - name: Generate coverage report
       run: |
-        sudo apt install python3-tk
-        sudo apt install tk-dev
         pip install pyyaml
         pip install pytest
         pip install pytest-cov

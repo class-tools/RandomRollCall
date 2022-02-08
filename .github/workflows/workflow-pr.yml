@@ -6,7 +6,7 @@ on: [pull_request]
 jobs:
   qa:
     name: Quality check
-    runs-on: ubuntu-18.04
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python
