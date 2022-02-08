@@ -16,6 +16,7 @@ jobs:
       - name: Run unit tests
         run: |
           pip install pytest
+          pip install pyyaml
           pytest
       - name: Wemake Python Stylguide
         uses: wemake-services/wemake-python-styleguide@0.13.4
