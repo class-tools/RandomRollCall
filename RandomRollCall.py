@@ -8,43 +8,63 @@ from tkinter.simpledialog import askinteger, askstring
 
 # Init
 root = tk.Tk()
-minnum = 1
-maxnum = 49
+supported_lang = ["en-Us", "zh-Hans"]
 
 # Yaml + Language
 curPath = os.path.dirname(os.path.realpath(__file__))
 yamlSettingsPath = os.path.join(curPath, "settings.yml")
-SettingsFile = open(yamlSettingsPath, 'r', encoding = 'utf-8')
-dicSettings = yaml.load(SettingsFile.read(), Loader = yaml.FullLoader)
-default_Lang = dicSettings['Language']
-SettingsFile.close()
-yamlPath = os.path.join(curPath, "lang/" + default_Lang + ".yml")
-file = open(yamlPath, 'r', encoding = 'utf-8')
-dic = yaml.load(file.read(), Loader = yaml.FullLoader)
-Lang_Title = dic['Title']
-Lang_Menu_Settings = dic['Settings']
-Lang_Menu_Help = dic['Help']
-Lang_Menu_About = dic['About']
-Lang_Menu_Quit = dic['Quit']
-Lang_Menu_MIN = dic['Ask_Min_Message']
-Lang_Menu_MAX = dic['Ask_Max_Message']
-Lang_Menu_Lang = dic['Switch_Lang']
-Lang_Switch = dic['Switch_Info']
-Lang_Messagebox_Message = dic['About_Message']
-Lang_Warn = dic['Warn']
-Lang_Please_Reopen = dic['Reopen']
-Lang_Error = dic['Error']
-Lang_Switch_Error_Message = dic['Switch_Lang_Error']
-file.close()
+try:
+    SettingsFile = open(yamlSettingsPath, 'r', encoding = 'utf-8')
+    dicSettings = yaml.load(SettingsFile.read(), Loader = yaml.FullLoader)
+    default_Lang = dicSettings['Language']
+    minnum = dicSettings['Min']
+    maxnum = dicSettings['Max']
+    version = dicSettings['Version']
+    SettingsFile.close()
+except:
+    showerror(title = "Error", message = "[Errno 1] Cannot read settings file data.")
+    print("ERROR: [Errno 1] Cannot read settings file data.")
+    root.quit()
+try:
+    yamlPath = os.path.join(curPath, "lang/" + default_Lang + ".yml")
+    file = open(yamlPath, 'r', encoding = 'utf-8')
+    dic = yaml.load(file.read(), Loader = yaml.FullLoader)
+    Lang_Title = dic['Title']
+    Lang_Menu_Settings = dic['Settings']
+    Lang_Menu_Help = dic['Help']
+    Lang_Menu_About = dic['About']
+    Lang_Menu_Quit = dic['Quit']
+    Lang_Menu_MIN = dic['Ask_Min_Message']
+    Lang_Menu_MAX = dic['Ask_Max_Message']
+    Lang_Menu_Lang = dic['Switch_Lang']
+    Lang_Switch = dic['Switch_Info']
+    Lang_Messagebox_Message = dic['About_Message']
+    Lang_Warn = dic['Warn']
+    Lang_Please_Reopen = dic['Reopen']
+    Lang_Error = dic['Error']
+    Lang_Switch_Error_Message = dic['Switch_Lang_Error']
+    file.close()
+except:
+    showerror(title = "Error", message = "[Errno 2] Cannot read language file data.")
+    print("ERROR: [Errno 2] Cannot read language file data.")
+    root.quit()
+
+# Update Settings
+def update():
+    SettingsFile = open(yamlSettingsPath, 'w', encoding = 'utf-8')
+    data = {"Language" : default_Lang, "Min" : minnum, "Max" : maxnum, "Version" : version}
+    yaml.dump(data = data, stream = SettingsFile, allow_unicode = True, sort_keys = False)
 
 # Min and MAX
 def Ask_MIN():
     global minnum
     minnum = askinteger(title = Lang_Menu_MIN, prompt = Lang_Menu_MIN)
+    update()
 
 def Ask_MAX():
     global maxnum
     maxnum = askinteger(title = Lang_Menu_MAX, prompt = Lang_Menu_MAX)
+    update()
 
 # Menubar
 def Show_Help():
@@ -54,18 +74,16 @@ def Show_Help():
         webbrowser.open("https://github.com/ren-yc/RandomRollCall/blob/master/README.md")
 
 def Show_About():
-    showinfo(title = Lang_Menu_About, message = Lang_Messagebox_Message)
+    showinfo(title = Lang_Menu_About, message = Lang_Messagebox_Message + version)
 
 def Ask_Lang():
-    global default_Lang
-    default_Lang = askstring(title = Lang_Menu_Lang, prompt = Lang_Switch)
-    if default_Lang != "zh-Hans" and default_Lang != "en-Us":
+    tmp = askstring(title = Lang_Menu_Lang, prompt = Lang_Switch)
+    if not tmp in supported_lang:
         showerror(title = Lang_Error, message = Lang_Switch_Error_Message)
     else:
-        Language = {'Language': default_Lang}
-        file = open(yamlSettingsPath, 'w', encoding = 'utf-8')
-        yaml.dump(Language, file, sort_keys = False)
-        file.close()
+        global default_Lang
+        default_Lang = tmp
+        update()
         showinfo(title = Lang_Warn, message = Lang_Please_Reopen)
         root.quit()
 
@@ -91,9 +109,10 @@ def optimize(Min, Max):
 
 # Mainloop
 def label_click_handler(events):
-    selected = random.randint(minnum, maxnum)
+    selected = optimize(minnum, maxnum)
     label_obj1['text'] = selected
 
+# Show
 selected = optimize(minnum, maxnum)
 label_obj1 = tk.Label(root, text = selected, width = 380, height = 380)
 label_obj1.config(font = 'Helvetica -%d bold' % 200)
