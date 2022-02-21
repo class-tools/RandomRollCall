@@ -10,7 +10,7 @@ This change log supports two languages: `en-Us` `zh-Hans`. (**Every two lines, t
 
 ## 1.1.4.x LTS
 
-**This version of the program is long time supported.**
+**This version of the program is long term supported.**
 
 **此版本的程序被长期支持。**
 
