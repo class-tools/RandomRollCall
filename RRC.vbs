@@ -1,3 +1,4 @@
+'Auto modify permission of settings file for RandomRollCall.
 Set WshShell = WScript.CreateObject("WScript.Shell")
 If WScript.Arguments.Length = 0 Then
     Set ObjShell = CreateObject("Shell.Application")
