@@ -8,6 +8,24 @@ This change log supports two languages: `en-Us` `zh-Hans`. (**Every two lines, t
 
 这个更新日志支持两个语言：`en-Us` `zh-Hans`。（**每两行第一行为 `en-Us` 第二行为 `zh-Hans`**）
 
+## 1.1.5.x LTS
+
+**This version of the program is long term supported.**
+
+**此版本的程序被长期支持。**
+
+Change Issues Checker Action runtime environment.
+
+更改 Issues Checker Action 运行时环境。
+
+Fix ISS #5. (Modify number range & The font size varies with the length of the number)
+
+修复 ISS #5。（修改数字范围 & 字号随数字长度变化）
+
+Add exception handling.
+
+加入异常处理。
+
 ## 1.1.4.x LTS
 
 **This version of the program is long term supported.**

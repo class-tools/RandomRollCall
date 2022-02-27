@@ -10,23 +10,36 @@ from tkinter.simpledialog import askinteger, askstring
 root = tk.Tk()
 supported_lang = ["en-Us", "zh-Hans"]
 
+# Error
+def errno_1():
+    showerror(title = "Error", message = "[Errno 1] Cannot read settings file data.")
+    print("ERROR: [Errno 1] Cannot read settings file data.")
+
+def errno_2():
+    showerror(title = "Error", message = "[Errno 2] Cannot read language file data.")
+    print("ERROR: [Errno 2] Cannot read language file data.")
+
+def errno_3():
+    showerror(title = "Error", message = "[Errno 3] Number out of range. (0 < min or max < 100000 and min < max)")
+    print("ERROR: [Errno 3] Number out of range. (0 < min or max < 100000 and min < max)")
+
 # Yaml + Language
-curPath = os.path.dirname(os.path.realpath(__file__))
-yamlSettingsPath = os.path.join(curPath, "settings.yml")
+yamlSettingsPath = os.path.join("", "settings.yml")
 try:
     SettingsFile = open(yamlSettingsPath, 'r', encoding = 'utf-8')
     dicSettings = yaml.load(SettingsFile.read(), Loader = yaml.FullLoader)
     default_Lang = dicSettings['Language']
     minnum = dicSettings['Min']
     maxnum = dicSettings['Max']
+    if minnum == None or maxnum == None:
+        raise TypeError
     version = dicSettings['Version']
     SettingsFile.close()
 except:
-    showerror(title = "Error", message = "[Errno 1] Cannot read settings file data.")
-    print("ERROR: [Errno 1] Cannot read settings file data.")
+    errno_1()
     root.quit()
 try:
-    yamlPath = os.path.join(curPath, "lang/" + default_Lang + ".yml")
+    yamlPath = os.path.join("", "lang/" + default_Lang + ".yml")
     file = open(yamlPath, 'r', encoding = 'utf-8')
     dic = yaml.load(file.read(), Loader = yaml.FullLoader)
     Lang_Title = dic['Title']
@@ -45,8 +58,7 @@ try:
     Lang_Switch_Error_Message = dic['Switch_Lang_Error']
     file.close()
 except:
-    showerror(title = "Error", message = "[Errno 2] Cannot read language file data.")
-    print("ERROR: [Errno 2] Cannot read language file data.")
+    errno_2()
     root.quit()
 
 # Update Settings
@@ -55,16 +67,41 @@ def update():
     data = {"Language" : default_Lang, "Min" : minnum, "Max" : maxnum, "Version" : version}
     yaml.dump(data = data, stream = SettingsFile, allow_unicode = True, sort_keys = False)
 
-# Min and MAX
+# Min Max Frontsize
 def Ask_MIN():
     global minnum
-    minnum = askinteger(title = Lang_Menu_MIN, prompt = Lang_Menu_MIN)
+    tmp = askinteger(title = Lang_Menu_MIN, prompt = Lang_Menu_MIN)
+    if tmp <= 0 or tmp >= maxnum:
+        errno_3()
+        return
+    if tmp != None:
+        minnum = tmp
+    else:
+        return
     update()
 
 def Ask_MAX():
     global maxnum
-    maxnum = askinteger(title = Lang_Menu_MAX, prompt = Lang_Menu_MAX)
+    tmp = askinteger(title = Lang_Menu_MAX, prompt = Lang_Menu_MAX)
+    if tmp >= 100000 or tmp <= minnum:
+        errno_3()
+        return
+    if tmp != None:
+        maxnum = tmp
+    else:
+        return
     update()
+
+def FrontSize(tmp):
+    length = len(str(tmp))
+    if length <= 3:
+        return 200
+    elif length == 4:
+        return 150
+    elif length == 5:
+        return 100
+    else:
+        return 50
 
 # Menubar
 def Show_Help():
@@ -103,19 +140,16 @@ root.title(Lang_Title)
 root.geometry("400x400")
 root.resizable(width = False, height = False)
 
-# Random
-def optimize(Min, Max):
-    return random.randint(Min, Max)
-
 # Mainloop
 def label_click_handler(events):
-    selected = optimize(minnum, maxnum)
+    selected = random.randint(minnum, maxnum)
+    label_obj1.config(font = 'Helvetica -%d bold' % FrontSize(selected))
     label_obj1['text'] = selected
 
 # Show
-selected = optimize(minnum, maxnum)
+selected = random.randint(minnum, maxnum)
 label_obj1 = tk.Label(root, text = selected, width = 380, height = 380)
-label_obj1.config(font = 'Helvetica -%d bold' % 200)
+label_obj1.config(font = 'Helvetica -%d bold' % FrontSize(selected))
 label_obj1.bind("<Button-1>", label_click_handler)
 label_obj1.pack(side = tk.LEFT)
 root.mainloop()
