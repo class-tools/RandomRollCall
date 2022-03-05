@@ -2,6 +2,7 @@ import webbrowser
 import random
 import yaml
 import os
+import sys
 import tkinter as tk
 from tkinter.messagebox import showerror, showinfo
 from tkinter.simpledialog import askinteger, askstring
@@ -38,6 +39,7 @@ try:
 except:
     errno_1()
     root.quit()
+    sys.exit(1)
 try:
     yamlPath = os.path.join("", "lang/" + default_Lang + ".yml")
     file = open(yamlPath, 'r', encoding = 'utf-8')
@@ -60,6 +62,7 @@ try:
 except:
     errno_2()
     root.quit()
+    sys.exit(1)
 
 # Update Settings
 def update():
@@ -139,6 +142,7 @@ menubar.add_command(label = Lang_Menu_Quit, command = root.quit)
 root.title(Lang_Title)
 root.geometry("400x400")
 root.resizable(width = False, height = False)
+root.iconbitmap("RandomRollCall.ico")
 
 # Mainloop
 def label_click_handler(events):
