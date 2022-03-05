@@ -1,8 +1,8 @@
 # Changelog
 
-This is the changelog of [RandomRollCall](https://github.com/ren-yc/RandomRollCall).
+This is the changelog of [RandomRollCall](https://github.com/class-tools/RandomRollCall).
 
-这是 [RandomRollCall](https://github.com/ren-yc/RandomRollCall) 的更新日志。
+这是 [RandomRollCall](https://github.com/class-tools/RandomRollCall) 的更新日志。
 
 This change log supports two languages: `en-Us` `zh-Hans`. (**Every two lines, the first line is `en-Us` and the second line is `zh-Hans`**)
 
@@ -13,6 +13,10 @@ This change log supports two languages: `en-Us` `zh-Hans`. (**Every two lines, t
 **This version of the program is long term supported.**
 
 **此版本的程序被长期支持。**
+
+Fix ISS #6.
+
+修复 ISS #6。
 
 Change Issues Checker Action runtime environment.
 
