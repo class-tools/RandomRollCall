@@ -109,9 +109,9 @@ def FrontSize(tmp):
 # Menubar
 def Show_Help():
     if default_Lang == "zh-Hans":
-        webbrowser.open("https://github.com/ren-yc/RandomRollCall/blob/master/README.zh-Hans.md")
+        webbrowser.open("https://github.com/class-tools/RandomRollCall/blob/master/README.zh-Hans.md")
     else:
-        webbrowser.open("https://github.com/ren-yc/RandomRollCall/blob/master/README.md")
+        webbrowser.open("https://github.com/class-tools/RandomRollCall/blob/master/README.md")
 
 def Show_About():
     showinfo(title = Lang_Menu_About, message = Lang_Messagebox_Message + version)
@@ -126,6 +126,7 @@ def Ask_Lang():
         update()
         showinfo(title = Lang_Warn, message = Lang_Please_Reopen)
         root.quit()
+        sys.exit(0)
 
 menubar = tk.Menu(root)
 root['menu'] = menubar
