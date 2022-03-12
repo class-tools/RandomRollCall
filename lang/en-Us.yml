@@ -12,3 +12,4 @@ Switch_Info: "Please enter the language code you need to switch to, it currently
 About_Message: "This program uses MIT License\nDeveloper: Class Tools Develop Team - Yuchen Ren\nGithub Repository: https://github.com/class-tools/RandomRollCall\nVersion "
 Error: "Error"
 Switch_Lang_Error: "Unsupported language."
+Window_Info: "Start"

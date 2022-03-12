@@ -1,15 +1,18 @@
 import webbrowser
 import random
+from numpy import False_
 import yaml
 import os
 import sys
 import tkinter as tk
+from time import sleep
 from tkinter.messagebox import showerror, showinfo
 from tkinter.simpledialog import askinteger, askstring
 
 # Init
 root = tk.Tk()
 supported_lang = ["en-Us", "zh-Hans"]
+running = False
 
 # Error
 def errno_1():
@@ -58,6 +61,7 @@ try:
     Lang_Please_Reopen = dic['Reopen']
     Lang_Error = dic['Error']
     Lang_Switch_Error_Message = dic['Switch_Lang_Error']
+    Lang_Window_Info = dic['Window_Info']
     file.close()
 except:
     errno_2()
@@ -118,6 +122,8 @@ def Show_About():
 
 def Ask_Lang():
     tmp = askstring(title = Lang_Menu_Lang, prompt = Lang_Switch)
+    if tmp == None:
+        return
     if not tmp in supported_lang:
         showerror(title = Lang_Error, message = Lang_Switch_Error_Message)
     else:
@@ -146,15 +152,22 @@ root.resizable(width = False, height = False)
 root.iconbitmap("RandomRollCall.ico")
 
 # Mainloop
-def label_click_handler(events):
-    selected = random.randint(minnum, maxnum)
-    label_obj1.config(font = 'Helvetica -%d bold' % FrontSize(selected))
-    label_obj1['text'] = selected
+def click(events):
+    global running
+    if running == False:
+        running = True
+        while running == True:
+            selected = random.randint(minnum, maxnum)
+            big_num_label.config(font = 'Helvetica -%d bold' % FrontSize(selected))
+            big_num_label['text'] = selected
+            big_num_label.update()
+            sleep(0.01)
+    else:
+        running = False
 
 # Show
-selected = random.randint(minnum, maxnum)
-label_obj1 = tk.Label(root, text = selected, width = 380, height = 380)
-label_obj1.config(font = 'Helvetica -%d bold' % FrontSize(selected))
-label_obj1.bind("<Button-1>", label_click_handler)
-label_obj1.pack(side = tk.LEFT)
+big_num_label = tk.Label(root, text = Lang_Window_Info, width = 380, height = 380)
+big_num_label.config(font = 'Helvetica -%d bold' % 100)
+big_num_label.bind("<Button-1>", click)
+big_num_label.pack(side = tk.LEFT)
 root.mainloop()

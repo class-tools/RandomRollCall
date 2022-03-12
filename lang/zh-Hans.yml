@@ -12,3 +12,4 @@ Switch_Info: "请输入你想要切换至的语言代号，目前支持 zh-Hans 
 About_Message: "本程序使用 MIT 许可证\n开发者 Class Tools Develop Team - Yuchen Ren\nGithub 存储库：https://github.com/class-tools/RandomRollCall\n版本 "
 Error: "错误"
 Switch_Lang_Error: "不支持的语言。"
+Window_Info: "开始"
