@@ -1,6 +1,5 @@
 import webbrowser
 import random
-from numpy import False_
 import yaml
 import os
 import sys
@@ -16,12 +15,12 @@ running = False
 
 # Error
 def errno_1():
-    showerror(title = "Error", message = "[Errno 1] Cannot read settings file data.")
-    print("ERROR: [Errno 1] Cannot read settings file data.")
+    showerror(title = "Fatal Error", message = "[Errno 1] Cannot read settings file data.")
+    print("FATAL ERROR: [Errno 1] Cannot read settings file data.")
 
 def errno_2():
-    showerror(title = "Error", message = "[Errno 2] Cannot read language file data.")
-    print("ERROR: [Errno 2] Cannot read language file data.")
+    showerror(title = "Fatal Error", message = "[Errno 2] Cannot read language file data.")
+    print("FATAL ERROR: [Errno 2] Cannot read language file data.")
 
 def errno_3():
     showerror(title = "Error", message = "[Errno 3] Number out of range. (0 < min or max < 100000 and min < max)")
@@ -56,12 +55,14 @@ try:
     Lang_Menu_MAX = dic['Ask_Max_Message']
     Lang_Menu_Lang = dic['Switch_Lang']
     Lang_Switch = dic['Switch_Info']
-    Lang_Messagebox_Message = dic['About_Message']
+    Lang_Messagebox_Message1 = dic['About_Message1']
+    Lang_Messagebox_Message2 = dic['About_Message2']
     Lang_Warn = dic['Warn']
     Lang_Please_Reopen = dic['Reopen']
     Lang_Error = dic['Error']
     Lang_Switch_Error_Message = dic['Switch_Lang_Error']
     Lang_Window_Info = dic['Window_Info']
+    Lang_Version = dic['Version']
     file.close()
 except:
     errno_2()
@@ -74,29 +75,27 @@ def update():
     data = {"Language" : default_Lang, "Min" : minnum, "Max" : maxnum, "Version" : version}
     yaml.dump(data = data, stream = SettingsFile, allow_unicode = True, sort_keys = False)
 
-# Min Max Frontsize
+# Dialog
 def Ask_MIN():
     global minnum
     tmp = askinteger(title = Lang_Menu_MIN, prompt = Lang_Menu_MIN)
+    if tmp == None:
+        return
     if tmp <= 0 or tmp >= maxnum:
         errno_3()
         return
-    if tmp != None:
-        minnum = tmp
-    else:
-        return
+    minnum = tmp
     update()
 
 def Ask_MAX():
     global maxnum
     tmp = askinteger(title = Lang_Menu_MAX, prompt = Lang_Menu_MAX)
+    if tmp == None:
+        return
     if tmp >= 100000 or tmp <= minnum:
         errno_3()
         return
-    if tmp != None:
-        maxnum = tmp
-    else:
-        return
+    maxnum = tmp
     update()
 
 def FrontSize(tmp):
@@ -118,7 +117,7 @@ def Show_Help():
         webbrowser.open("https://github.com/class-tools/RandomRollCall/blob/master/README.md")
 
 def Show_About():
-    showinfo(title = Lang_Menu_About, message = Lang_Messagebox_Message + version)
+    showinfo(title = Lang_Menu_About, message = Lang_Messagebox_Message1 + version + Lang_Messagebox_Message2 + Lang_Version)
 
 def Ask_Lang():
     tmp = askstring(title = Lang_Menu_Lang, prompt = Lang_Switch)

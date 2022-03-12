@@ -8,6 +8,16 @@ This change log supports two languages: `en-Us` `zh-Hans`. (**Every two lines, t
 
 这个更新日志支持两个语言：`en-Us` `zh-Hans`。（**每两行第一行为 `en-Us` 第二行为 `zh-Hans`**）
 
+## 1.1.6.x
+
+Add changing number. (The number changes continuously after the first click, and stops after the second click)
+
+添加不断变化的数字。（第一次点击后数字不断变化，第二次点击后停止）
+
+Add welcome text. ("Start")
+
+添加欢迎文本。（“开始”）
+
 ## 1.1.5.x LTS
 
 **This version of the program is long term supported.**
