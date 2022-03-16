@@ -1,3 +1,10 @@
+'''
+RandomRollCall 1.1.6
+This source code file is under MIT License.
+Copyright (c) 2022 Class Tools Develop Team
+Contributors: ren-yc (Yuchen Ren)
+'''
+from typing import Type
 import webbrowser
 import random
 import yaml
@@ -31,7 +38,7 @@ yamlSettingsPath = os.path.join("", "settings.yml")
 try:
     SettingsFile = open(yamlSettingsPath, 'r', encoding = 'utf-8')
     dicSettings = yaml.load(SettingsFile.read(), Loader = yaml.FullLoader)
-    default_Lang = dicSettings['Language']
+    curlang = dicSettings['Language']
     minnum = dicSettings['Min']
     maxnum = dicSettings['Max']
     if minnum == None or maxnum == None:
@@ -43,7 +50,7 @@ except:
     root.quit()
     sys.exit(1)
 try:
-    yamlPath = os.path.join("", "lang/" + default_Lang + ".yml")
+    yamlPath = os.path.join("", "lang/" + curlang + ".yml")
     file = open(yamlPath, 'r', encoding = 'utf-8')
     dic = yaml.load(file.read(), Loader = yaml.FullLoader)
     Lang_Title = dic['Title']
@@ -63,6 +70,8 @@ try:
     Lang_Switch_Error_Message = dic['Switch_Lang_Error']
     Lang_Window_Info = dic['Window_Info']
     Lang_Version = dic['Version']
+    if Lang_Title == None or Lang_Menu_Settings == None or Lang_Menu_Help == None or Lang_Menu_About == None or Lang_Menu_Quit == None or Lang_Menu_MIN == None or Lang_Menu_MAX == None or Lang_Menu_Lang == None or Lang_Switch == None or Lang_Messagebox_Message1 == None or Lang_Messagebox_Message2 == None or Lang_Warn == None or Lang_Please_Reopen == None or Lang_Error == None or Lang_Switch_Error_Message == None or Lang_Window_Info == None or Lang_Version == None:
+        raise TypeError
     file.close()
 except:
     errno_2()
@@ -72,7 +81,7 @@ except:
 # Update Settings
 def update():
     SettingsFile = open(yamlSettingsPath, 'w', encoding = 'utf-8')
-    data = {"Language" : default_Lang, "Min" : minnum, "Max" : maxnum, "Version" : version}
+    data = {"Language" : curlang, "Min" : minnum, "Max" : maxnum, "Version" : version}
     yaml.dump(data = data, stream = SettingsFile, allow_unicode = True, sort_keys = False)
 
 # Dialog
@@ -111,7 +120,7 @@ def FrontSize(tmp):
 
 # Menubar
 def Show_Help():
-    if default_Lang == "zh-Hans":
+    if curlang == "zh-Hans":
         webbrowser.open("https://github.com/class-tools/RandomRollCall/blob/master/README.zh-Hans.md")
     else:
         webbrowser.open("https://github.com/class-tools/RandomRollCall/blob/master/README.md")
@@ -126,8 +135,8 @@ def Ask_Lang():
     if not tmp in supported_lang:
         showerror(title = Lang_Error, message = Lang_Switch_Error_Message)
     else:
-        global default_Lang
-        default_Lang = tmp
+        global curlang
+        curlang = tmp
         update()
         showinfo(title = Lang_Warn, message = Lang_Please_Reopen)
         root.quit()
