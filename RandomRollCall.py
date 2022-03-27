@@ -1,3 +1,9 @@
+'''
+RandomRollCall Main Source File 1.1.6
+This source code file is under MIT License.
+Copyright (c) 2022 Class Tools Develop Team
+Contributors: ren-yc
+'''
 import webbrowser
 import random
 import yaml

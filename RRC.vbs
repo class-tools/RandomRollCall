@@ -1,4 +1,7 @@
-'Auto modify permission of settings file for RandomRollCall.
+'RandomRollCall Main Source File 1.1.6
+'This source code file is under MIT License.
+'Copyright (c) 2022 Class Tools Develop Team
+'Contributors: ren-yc
 Set WshShell = WScript.CreateObject("WScript.Shell")
 If WScript.Arguments.Length = 0 Then
     Set ObjShell = CreateObject("Shell.Application")
