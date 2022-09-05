@@ -60,7 +60,7 @@ def update():
 # Dialog
 def Ask_MIN():
 	tmp = askinteger(title = Language_Dict['Ask_Min_Message'], prompt = Language_Dict['Ask_Min_Message'], initialvalue = Settings_Dict['Min'])
-	if tmp == None:
+	if tmp is None:
 		return
 	if tmp <= 0 or tmp >= Settings_Dict['Max']:
 		ERRNO2()
@@ -70,7 +70,7 @@ def Ask_MIN():
 
 def Ask_MAX():
 	tmp = askinteger(title = Language_Dict['Ask_Max_Message'], prompt = Language_Dict['Ask_Max_Message'], initialvalue = Settings_Dict['Max'])
-	if tmp == None:
+	if tmp is None:
 		return
 	if tmp >= 100000 or tmp <= Settings_Dict['Min']:
 		ERRNO2()
@@ -101,7 +101,7 @@ def Show_About():
 
 def Ask_Lang():
 	tmp = askstring(title = Language_Dict['Switch_Lang'], prompt = Language_Dict['Switch_Info'])
-	if tmp == None:
+	if tmp is None:
 		return
 	if not tmp in SUPPORT_LANG:
 		showerror(title = Language_Dict['Error'], message = Language_Dict['Switch_Lang_Error'])
