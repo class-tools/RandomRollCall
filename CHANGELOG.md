@@ -1,12 +1,46 @@
 # Changelog
 
-This is the changelog of [RandomRollCall](https://github.com/class-tools/RandomRollCall).
+This is the changelog of [Random Roll Call](https://github.com/class-tools/RandomRollCall).
 
-这是 [RandomRollCall](https://github.com/class-tools/RandomRollCall) 的更新日志。
+这是 [随机点名](https://github.com/class-tools/RandomRollCall) 的更新日志。
 
-This change log supports two languages: `en-Us` `zh-Hans`. (**Every two lines, the first line is `en-Us` and the second line is `zh-Hans`**)
+This change log supports two languages: `en-US` `zh-CN`. (**Every two lines, the first line is `en-US` and the second line is `zh-CN`**)
 
-这个更新日志支持两个语言：`en-Us` `zh-Hans`。（**每两行第一行为 `en-Us` 第二行为 `zh-Hans`**）
+这个更新日志支持两个语言：`en-US` `zh-CN`。（**每两行第一行为 `en-US` 第二行为 `zh-CN`**）
+
+## 2.0.0
+
+Replan the project.
+
+重新规划项目。
+
+Add CodeQL GitHub Action for static code scanning.
+
+添加 CodeQL GitHub Action 以进行静态代码扫描。
+
+Rename language identifier for Simplified Chinese.
+
+重命名简体中文语言标识符。
+
+Change data files format to Json (Because this module is built-in in Python).
+
+更改数据文件格式为 Json （因为此模块内置在 Python 中）。
+
+Change source code indent to Tab.
+
+更改源代码缩进为 Tab。
+
+When the setting file is missing, the file with the default configuration is automatically generated.
+
+缺失设置文件时自动生成带有默认配置的文件。
+
+The installation package is no longer planned to be provided.
+
+计划不再提供安装包 （但我们允许其他人在发布的文件为基础制作并自由分发安装包）。
+
+Update repository related files to the latest organization standards (However, we allow others to make and freely distribute installation packages based on published files).
+
+将存储库相关文件更新至最新组织标准。
 
 ## 1.1.6.x
 
@@ -20,9 +54,9 @@ Add welcome text. ("Start")
 
 ## 1.1.5.x LTS
 
-**This version of the program is long term supported.**
+~~**This version of the program is long term supported.**~~
 
-**此版本的程序被长期支持。**
+~~**此版本的程序被长期支持。**~~
 
 Fix ISS #6.
 
@@ -42,9 +76,9 @@ Add exception handling.
 
 ## 1.1.4.x LTS
 
-**This version of the program is long term supported.**
+~~**This version of the program is long term supported.**~~
 
-**此版本的程序被长期支持。**
+~~**此版本的程序被长期支持。**~~
 
 Add Github Action to delete issue of users without starring repository.
 

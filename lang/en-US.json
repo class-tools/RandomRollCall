@@ -1,0 +1,19 @@
+{
+	"Title": "Random Roll Call",
+	"Settings": "Settings",
+	"Help": "Help",
+	"About": "About",
+	"Quit": "Quit",
+	"Warn": "Warning",
+	"Reopen": "Please reopen this program to switch language.",
+	"Ask_Min_Message": "Edit minimum student number...",
+	"Ask_Max_Message": "Edit maximum student number...",
+	"Switch_Lang": "Switch language...",
+	"Switch_Info": "Please enter the language code you need to switch to, it currently supports zh-CN en-US.",
+	"About_Message1": "This program uses MIT License\nCopyright © 2022 Class Tools Develop Team. All rights reserved.\nGithub Repository: https://github.com/class-tools/RandomRollCall\nVersion ",
+	"About_Message2": "\nLanguage File Version ",
+	"Error": "Error",
+	"Switch_Lang_Error": "Unsupported language.",
+	"Window_Info": "Start",
+	"Version": "2.0.0"
+}
