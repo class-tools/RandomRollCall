@@ -24,4 +24,4 @@ A small GUI random roll call program made by Python.
 | :---: |
 | ![](https://shields.io/badge/Coding-green?logo=visual-studio-code&style=for-the-badge)<br>![](https://shields.io/badge/BugTester-yellow?logo=open-bug-bounty&style=for-the-badge) |
 
-**For more information, please go to [Wiki](https://github.com/ren-yc/RandomRollCall/wiki)**
+**For more information, please go to [Wiki](https://github.com/class-tools/RandomRollCall/wiki)**

@@ -20,7 +20,7 @@ RUNNING = False
 VERSION = '2.0.0'
 TK_ROOT = tkinter.Tk()
 SUPPORT_LANG = ['en-US', 'zh-CN']
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = (os.path.dirname(sys.executable) if hasattr(sys, 'frozen') else os.path.dirname(__file__))
 
 # Error
 def ERRNO1():
@@ -34,13 +34,16 @@ def ERRNO2():
 # Read
 def Read_Settings():
 	global Settings_Dict
+	Settings_Dict = {}
 	try:
 		with open(os.path.join(BASE_DIR, './settings.json'), 'r', encoding = 'utf-8') as f:
 			Settings_Dict = json.load(f)
-	except (FileNotFoundError, json.decoder.JSONDecodeError):
+			assert Settings_Dict['Min'] > 0 and Settings_Dict['Max'] < 100000 and Settings_Dict['Min'] < Settings_Dict['Max']
+	except (KeyError, AssertionError, FileNotFoundError, json.decoder.JSONDecodeError):
 		Settings_Dict['Language'] = 'en-US'
 		Settings_Dict['Min'] = 1
 		Settings_Dict['Max'] = 49
+		update()
 
 def Read_Language():
 	global Language_Dict
@@ -99,18 +102,11 @@ def Show_Help():
 def Show_About():
 	showinfo(title = Language_Dict['About'], message = Language_Dict['About_Message1'] + VERSION + Language_Dict['About_Message2'] + Language_Dict['Version'])
 
-def Ask_Lang():
-	tmp = askstring(title = Language_Dict['Switch_Lang'], prompt = Language_Dict['Switch_Info'])
-	if tmp is None:
-		return
-	if not tmp in SUPPORT_LANG:
-		showerror(title = Language_Dict['Error'], message = Language_Dict['Switch_Lang_Error'])
-	else:
-		Settings_Dict['Language'] = tmp
-		update()
-		showinfo(title = Language_Dict['Warn'], message = Language_Dict['Reopen'])
-		TK_ROOT.quit()
-		sys.exit(0)
+def Switch_Lang(Lang: str):
+	Settings_Dict['Language'] = Lang
+	update()
+	showinfo(title = Language_Dict['Warn'], message = Language_Dict['Reopen'])
+	TK_ROOT.quit()
 
 # Init
 def Set_Window():
@@ -127,7 +123,10 @@ def Set_Menubar():
 	settingsmenu = tkinter.Menu(menubar, tearoff = False)
 	settingsmenu.add_command(label = Language_Dict['Ask_Min_Message'], command = Ask_MIN)
 	settingsmenu.add_command(label = Language_Dict['Ask_Max_Message'], command = Ask_MAX)
-	settingsmenu.add_command(label = Language_Dict['Switch_Lang'], command = Ask_Lang)
+	languagemenu = tkinter.Menu(settingsmenu, tearoff = False)
+	for item in SUPPORT_LANG:
+		languagemenu.add_radiobutton(label = item, state = 'disabled' if item == Settings_Dict['Language'] else 'normal', command = (lambda p = item: Switch_Lang(p)))
+	settingsmenu.add_cascade(label = Language_Dict['Switch_Lang'], menu = languagemenu)
 	menubar.add_cascade(label = Language_Dict['Settings'], menu = settingsmenu)
 	menubar.add_command(label = Language_Dict['Help'], command = Show_Help)
 	menubar.add_command(label = Language_Dict['About'], command = Show_About)

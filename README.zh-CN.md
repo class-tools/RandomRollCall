@@ -24,4 +24,4 @@
 | :---: |
 | ![](https://shields.io/badge/Coding-green?logo=visual-studio-code&style=for-the-badge)<br>![](https://shields.io/badge/BugTester-yellow?logo=open-bug-bounty&style=for-the-badge) |
 
-**更多信息请前往 [Wiki](https://github.com/ren-yc/RandomRollCall/wiki)**
+**更多信息请前往 [Wiki](https://github.com/class-tools/RandomRollCall/wiki)**
