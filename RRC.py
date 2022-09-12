@@ -8,15 +8,17 @@ Contributors: ren-yc
 import os
 import sys
 import json
+import atexit
 import random
 import tkinter
 import webbrowser
 from time import sleep
 from tkinter.messagebox import showerror, showinfo
-from tkinter.simpledialog import askinteger, askstring
+from tkinter.simpledialog import askinteger
 
 # Variables
 RUNNING = False
+END = False
 VERSION = '2.0.0'
 TK_ROOT = tkinter.Tk()
 SUPPORT_LANG = ['en-US', 'zh-CN']
@@ -108,13 +110,19 @@ def Switch_Lang(Lang: str):
 	showinfo(title = Language_Dict['Warn'], message = Language_Dict['Reopen'])
 	TK_ROOT.quit()
 
+def Quit():
+	global END
+	END = True
+	TK_ROOT.quit()
+	atexit.unregister(Quit)
+
 # Init
 def Set_Window():
 	global Language_Dict
 	TK_ROOT.title(Language_Dict['Title'])
 	TK_ROOT.geometry('400x400')
 	TK_ROOT.resizable(width = False, height = False)
-	TK_ROOT.iconbitmap('RRC.ico')
+	TK_ROOT.iconphoto(False, tkinter.PhotoImage(file = os.path.join(BASE_DIR, './RRC.png')))
 
 def Set_Menubar():
 	global Language_Dict
@@ -130,19 +138,23 @@ def Set_Menubar():
 	menubar.add_cascade(label = Language_Dict['Settings'], menu = settingsmenu)
 	menubar.add_command(label = Language_Dict['Help'], command = Show_Help)
 	menubar.add_command(label = Language_Dict['About'], command = Show_About)
-	menubar.add_command(label = Language_Dict['Quit'], command = TK_ROOT.quit)
+	menubar.add_command(label = Language_Dict['Quit'], command = Quit)
 
 # Events
 def click(events):
 	global RUNNING
+	global END
 	if RUNNING == False:
 		RUNNING = True
-		while RUNNING == True:
-			selected = random.randint(Settings_Dict['Min'], Settings_Dict['Max'])
-			big_num_label.config(font = 'Helvetica -%d bold' % FrontSize(selected))
-			big_num_label['text'] = selected
-			big_num_label.update()
-			sleep(0.01)
+		while RUNNING == True and END == False:
+			try:
+				selected = random.randint(Settings_Dict['Min'], Settings_Dict['Max'])
+				big_num_label.config(font = 'Helvetica -%d bold' % FrontSize(selected))
+				big_num_label['text'] = selected
+				big_num_label.update()
+				sleep(0.01)
+			except tkinter._tkinter.TclError:
+				break
 	else:
 		RUNNING = False
 
@@ -156,6 +168,7 @@ def main():
 	TK_ROOT.mainloop()
 
 if __name__ == '__main__':
+	atexit.register(Quit)
 	Read_Settings()
 	Read_Language()
 	Set_Window()
